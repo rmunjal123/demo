@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Learn Writing Numbers
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content [forceOverscroll]="false">
+    <ion-card-header>
+      Write Number:
+    </ion-card-header>
+    <ion-card-content>{{rnum}}</ion-card-content>
+
+  <ion-row>
+    <ion-col *ngFor="let color of colors" [style.background]="color" class="color-block" tappable
+      (click)="selectColor(color)"></ion-col>
+  </ion-row>
+  <ion-radio-group [(ngModel)]="selectedColor">
+    <ion-row>
+      <ion-col *ngFor="let color of colors" class="ion-text-center">
+        <ion-radio [value]="color"></ion-radio>
+      </ion-col>
+    </ion-row>
+  </ion-radio-group>
+ 
+  <ion-range min="2" max="20" color="primary" [(ngModel)]="lineWidth">
+    <ion-icon size="small" slot="start" name="brush"></ion-icon>
+    <ion-icon slot="end" name="brush"></ion-icon>
+  </ion-range>
+ 
+  <canvas #imageCanvas (mousedown)="startDrawing($event)" (touchstart)="startDrawing($event)"
+    (touchmove)="moved($event)" (mousemove)="moved($event)" (mouseup)="endDrawing()" (touchend)="endDrawing()" (newImage)="predict($event)"></canvas>
+    <br>
+  <ion-button  expand="block" color="danger" (click)="clear()" (click)="getRandomArbitrary(0,9)">Erase</ion-button>
+
+  <!-- <ion-button expand="full" (click)="setBackground()">
+    <ion-icon slot="start" name="image"></ion-icon>
+    Set Background Image
+  </ion-button>
+ 
+  <ion-button expand="full" (click)="exportCanvasImage()">
+    <ion-icon slot="start" name="download"></ion-icon>
+    Export Canvas Image
+  </ion-button> -->
+    <ion-card-header>
+      Predicted Number:
+    </ion-card-header>
+    <ion-card-content>{{ predictedNumber }}</ion-card-content>
+</ion-content>
